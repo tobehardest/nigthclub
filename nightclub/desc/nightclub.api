@@ -1,0 +1,217 @@
+syntax = "v1"
+
+info(
+	title: "夜店服务"
+	desc: "旅游服务"
+	author: "tobehardest"
+	email: "cvchen587@163.com"
+	version: "v1"
+)
+
+import (
+	"wechat/wechat.api"
+	"message/message.api"
+	"user/user.api"
+	"chat/chat.api"
+	"merchant/merchant.api"
+	"common/common.api"
+	"order/order.api"
+	"payment/payment.api"
+)
+
+@server(
+	prefix: wechat/v1
+	group: wechat
+)
+service nightclub {
+	@doc "获取手机号"
+	@handler getUserPhone
+	post /get_phone_number (GetPhoneReq) returns (GetPhoneResp)
+}
+
+@server(
+	prefix: usercenter/v1
+	group: user
+)
+service nightclub {
+	@doc "用户注册"
+	@handler userRegister
+	post /user/register (RegisterReq) returns (RegisterResp)
+	
+	@doc "用户登录"
+	@handler userLogin
+	post /user/login (LoginReq) returns (LoginResp)
+	
+	@doc "生成token服务"
+	@handler generateToken
+	post /user/generate_token (GenerateTokenReq) returns (GenerateTokenResp)
+}
+
+@server(
+	prefix: usercenter/v1
+	group: user
+	jwt: JwtAuth
+)
+service nightclub {
+	
+	@doc "获取用户信息"
+	@handler getUserInfo
+	post /user/info (GetUserInfoReq) returns (GetUserInfoResp)
+	
+	@doc "修改用户名"
+	@handler updateUserName
+	post /user/update/user_name (UpdateUserNameReq) returns (UpdateUserNameResp)
+	
+	@doc "修改头像"
+	@handler updateAvatar
+	post /user/update/avatar (UpdateAvatarReq) returns (UpdateAvatarResp)
+	
+	@doc "修改状态（标签）"
+	@handler updateFeature
+	post /user/update/feature (UpdateFeatureReq) returns (UpdateFeatureResp)
+	
+	@doc "修改用户位置信息"
+	@handler updateUserLocation
+	post /user/update/location (UpdateUserLocationReq) returns (UpdateUserLocationResp)
+	
+	@doc "修改微信号"
+	@handler updateWechatId
+	post /user/update/wechat_id (UpdateWechatIdReq) returns (UpdateWechatIdResp)
+	
+	@doc "查询所有在线用户"
+	@handler onlineUsers
+	post /select/onlineuser (OnlineUsersReq) returns (OnlineUsersResp)
+	
+	@doc "获取用户微信号"
+	@handler getUserWechatId
+	post /select/wechatId (GetUserWechatIdReq) returns (GetUserWechatIdResp)
+	
+	@doc "获取用户头像"
+	@handler getUserAvatar
+	get /select/avatar/:file(GetUserAvatarReq)
+	
+	@doc "用户到店接口"
+	@handler userToShop
+	post /user/to/shop (UserToStoreReq) returns (UserToStoreResp)
+}
+
+@server(
+	prefix: message/v1
+	group: message
+	jwt: JwtAuth
+)
+service nightclub {
+	@doc "发拍一拍消息"
+	@handler sendPatMessage
+	post /send/message/pat (SendPatMessageReq) returns (SendPatMessageResp)
+	
+	@doc "发礼物消息"
+	@handler sendGiftMessage
+	post /send/message/gift (SendGiftMessageReq) returns (SendGiftMessageResp)
+	
+	@doc "获取消息列表"
+	@handler getMessageList
+	post /get/message_list (GetMessageListReq) returns (GetMessageListResp)
+	
+	@doc "是否送过礼物"
+	@handler getHasSendGiftMessage
+	post /get/has/send/gift (GetHasSendGiftReq) returns (GetHasSendGiftResp)
+	
+	@doc "是否有新的通知"
+	@handler getHasNewMessage
+	post /get/has/new/message (GetHasNewMessageReq) returns (GetHasNewMessageResp)
+	
+	@doc "是否有新的送礼广播"
+	@handler getHasNewGiftBC
+	post /get/has/new/gift/bc (GetHasNewGiftBCReq) returns (GetHasNewGiftBCResp)
+}
+
+@server(
+	prefix: chat/v1
+	group: chat
+	jwt: JwtAuth
+)
+service nightclub {
+	@doc "发送私聊消息"
+	@handler sendChatToFriend
+	post /send/friend/chat (SendFriendChatReq) returns (SendFriendChatResp)
+	
+	@doc "获取和正在聊天的人有无新的私聊消息"
+	@handler getHasNewFriendChat
+	post /get/has/new/friend/chat (GetHasNewFriendChatReq) returns (GetHasNewFriendChatResp)
+	
+	@doc "获取私聊消息"
+	@handler getFriendChatList
+	post /get/friend/chat_list (GetFriendChatListReq) returns (GetFriendChatListResp)
+	
+	@doc "消息列表"
+	@handler getUserChatList
+	post /get/user/chat_list (GetUserChatListReq) returns (GetUserChatListResp)
+	
+	@doc "获取是否有新的私聊消息"
+	@handler getHasNewUserChat
+	post /get/has/new/user/chat (GetHasNewUserChatReq) returns (GetHasNewUserChatResp)
+}
+
+@server(
+	prefix: merchant/v1
+	group: merchant
+	jwt: JwtAuth
+)
+service nightclub {
+	@doc "增加属于某个商户的桌子"
+	@handler addRoom
+	post /add/Room (AddRoomReq) returns (AddRoomResp)
+	
+	@doc "增加商户"
+	@handler addMerchant
+	post /add/merchant (AddMerchantReq) returns (AddMerchantResp)
+}
+
+@server(
+	prefix: common/v1
+	group: common
+)
+service nightclub {
+	@doc "获取特效"
+	@handler getSpecialEffect
+	get /get/special_effect/:specialEffectId(GetSpecialEffectReq)
+}
+
+@server(
+	prefix: order/v1
+	group: order
+	jwt: JwtAuth
+)
+service nightclub {
+	@doc "创建送礼订单"
+	@handler creatSendGiftOrder
+	post /sendGiftOrder/creatSendGiftOrder (CreatSendGiftOrderReq) returns (CreatSendGiftOrderResp)
+}
+
+//no need login
+@server(
+	prefix: payment/v1
+	group: payment
+)
+service nightclub {
+	@doc "第三方支付回调接口，不需要进行登陆即可调用"
+	@handler thirdPaymentWxPayCallback
+	post /thirdPayment/thirdPaymentWxPayCallback (ThirdPaymentWxPayCallbackReq) returns (ThirdPaymentWxPayCallbackResp)
+}
+
+//need login
+@server(
+	prefix: payment/v1
+	group: payment
+	jwt: JwtAuth
+)
+service nightclub {
+	@doc "第三方支付调用接口，需要登录才能进行支付"
+	@handler thirdPaymentwxPay
+	post /thirdPayment/thirdPaymentWxPay (PaymentWxPayReq) returns (PaymentWxPayReq)
+	
+	@doc "第三方支付查询接口，需要登录才能进行支付"
+	@handler thirdPaymentwxQueryPay
+	post /thirdPayment/thirdPaymentWxPayQuery (PaymentWxPayQueryReq) returns (PaymentWxPayQueryResp)
+}

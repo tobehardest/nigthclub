@@ -1,0 +1,98 @@
+syntax = "v1"
+
+info(
+    title: "消息服务"
+    desc: "消息服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+type (
+    Message {
+        MessageId int64 `json:"messageId,string"`
+        FromId int64 `json:"fromId,string"`
+        ToId int64 `json:"toId,string"`
+        Type int64 `json:"type"`
+        Content string `json:"content"`
+        Status int64 `json:"status"`
+        CreatTime string `json:"creatTime"`
+    }
+    GiftContent {
+        GiftId int64 `json:"giftId"`
+        GiftName string `json:"giftName"`
+        GiftMessage string `json:"giftMessage"`
+        GiftAmount int64 `json:"giftAmount"`
+    }
+    WithDrawContent {
+        PaymentMethod string `json:"paymentMethod"`
+        CurrentStatus string `json:"currentStatus"`
+    }
+)
+
+type (
+    SendPatMessageReq {
+        FromId int64 `json:"fromId,string"`
+        ToId int64 `json:"toId,string"`
+    }
+    SendPatMessageResp {
+        Status string `json:"status"`
+    }
+)
+
+type (
+    SendGiftMessageReq {
+        MerchantId int64 `json:"merchantId,string"`
+        FromId int64 `json:"fromId,string"`
+        ToId int64 `json:"toId,string"`
+        GiftContent GiftContent `json:"giftContent"`
+    }
+    SendGiftMessageResp {
+        Status string `json:"status"`
+    }
+)
+
+type (
+    GetMessageListReq {
+        ToId int64 `json:"toId,string"`
+        Page int64 `json:"page"`
+        Size int64 `json:"size"`
+    }
+    GetMessageListResp {
+        MessageList []Message `json:"messageList"`
+    }
+)
+
+type (
+    GetHasSendGiftReq {
+        ToId int64 `json:"toId,string"`
+    }
+    GetHasSendGiftResp {
+        HasSendGift bool `json:"hasSendGift"`
+    }
+)
+
+type (
+    GetHasNewMessageReq {
+
+    }
+    GetHasNewMessageResp {
+        HasNewMessage bool `json:"hasNewMessage"`
+        Balance  int64 `json:"balance"`
+    }
+)
+
+type (
+    GetHasNewGiftBCReq {
+        MerchantId int64 `json:"merchantId,string"`
+    }
+    GetHasNewGiftBCVO {
+        GiftId int64 `json:"giftId"`
+        FromName string `json:"fromName"`
+        ToName string `json:"toName"`
+    }
+    GetHasNewGiftBCResp {
+        HasNew bool `json:"hasNew"`
+        GetHasNewGiftBCList []GetHasNewGiftBCVO `json:"getHasNewGiftBcList"`
+    }
+)

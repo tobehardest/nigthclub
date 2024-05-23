@@ -1,0 +1,84 @@
+syntax = "v1"
+
+info(
+    title: "聊天服务"
+    desc: "聊天服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+type (
+    Chat {
+        ChatId int64 `json:"chatId,string"`
+        FromId int64 `json:"fromId,string"`
+        ToId int64 `json:"toId,string"`
+        Content string `json:"content"`
+        Status int64 `json:"status"`
+        CreatTime string `json:"creatTime"`
+    }
+)
+
+type (
+    GetHasNewFriendChatReq {
+        FromId int64 `json:"fromId,string"`
+        ToId int64 `json:"toId,string"`
+    }
+    GetHasNewFriendChatResp {
+        HasNew bool `json:"hasNew"`
+    }
+)
+
+type (
+    SendFriendChatReq {
+        ToId int64 `json:"toId,string"` // 和用户聊天的那个人
+        Content string `json:"content"`
+    }
+    SendFriendChatResp {
+        Status string `json:"status"`
+    }
+)
+
+type (
+    GetFriendChatListReq {
+        FromId int64 `json:"fromId,string"` //和用户聊天的那个人
+        //ToId int64 `json:"toId,string"`
+    }
+    GetFriendChatVO {
+        FromId int64 `json:"fromId,string"`
+        UserName string `json:"userName"`
+        Avatar  string `json:"avatar"`
+        Content string `json:"content"`
+        CreatTime string `json:"creatTime"`
+    }
+    GetFriendChatListResp {
+        ChatList []GetFriendChatVO `json:"chatList"`
+    }
+)
+
+type (
+    GetUserChatListReq {
+        Page int64 `json:"page"`
+        Size int64 `json:"size"`
+    }
+    GetUserChatVO {
+        FromId int64 `json:"fromId,string"`
+        UserName string `json:"userName"`
+        Features []string `json:"features"`
+        Avatar  string `json:"avatar"`
+        Content string `json:"content"`
+        CreatTime string `json:"creatTime"`
+    }
+    GetUserChatListResp {
+        UserChatList []GetUserChatVO `json:"userChatList"`
+    }
+)
+
+type (
+    GetHasNewUserChatReq {
+
+    }
+    GetHasNewUserChatResp {
+        HasNew bool `json:"hasNew"`
+    }
+)

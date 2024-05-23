@@ -1,0 +1,51 @@
+syntax = "v1"
+
+info(
+    title: "商户服务"
+    desc: "商户服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+import (
+    "common/common.api"
+)
+
+type (
+    Merchant {
+        MerchantId int64 `json:"merchantId,string"`
+        MerchantName string `json:"merchantName"`
+        Location Location `json:"location"`
+        Balance  int64 `json:"balance"`
+        Status int64 `json:"status"`
+        CreatTime string `json:"creatTime"`
+    }
+    Room {
+        RoomId int64 `json:"roomId,string"`
+        MerchantId int64 `json:"merchantId,string"`
+        SerialNum int64 `json:"serialNum"`
+        Status int64 `json:"status"`
+        CreatTime string `json:"creatTime"`
+    }
+)
+
+type (
+    AddMerchantReq {
+        MerchantName string `json:"merchantName"`
+        Location Location `json:"location"`
+    }
+    AddMerchantResp {
+        Status string `json:"status"`
+    }
+)
+
+type (
+    AddRoomReq {
+        MerchantId int64 `json:"merchantId,string"`
+        SerialNum int64 `json:"serialNum"`
+    }
+    AddRoomResp {
+        Status string `json:"status"`
+    }
+)

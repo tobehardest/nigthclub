@@ -1,0 +1,19 @@
+syntax = "v1"
+
+info(
+    title: "订单服务"
+    desc: "订单服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+type (
+    CreatSendGiftOrderReq {
+        ToId int64 `json:"toId"`
+        GiftPrice int64 `json:"giftPrice"`
+    }
+    CreatSendGiftOrderResp {
+        OrderSn string `json:"orderSn"`
+    }
+)

@@ -1,0 +1,148 @@
+syntax = "v1"
+
+info(
+    title: "用户服务"
+    desc: "用户服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+import (
+    "common/common.api"
+)
+
+type (
+    User {
+        UserId int64 `json:"userId,string"`
+        UserName string `json:"userName"`
+        Avatar  string `json:"avatar"`
+        Balance  int64 `json:"balance"`
+        Location string `json:"location"`
+        Features []string `json:"features"`
+        Mobile   string `json:"mobile"`
+        WechatId  string `json:"wechatId"`
+        Status  int64 `json:"status"`
+        LastLoginTime int64 `json:"lastLoginTime"`
+        CreatTime string `json:"creatTime"`
+    }
+)
+
+type (
+    RegisterReq {
+        Mobile   string `json:"mobile"`
+    }
+    RegisterResp {
+        UserId int64 `json:"userId,string"`
+        AccessToken GenerateTokenResp `json:"accessToken"`
+    }
+)
+
+type (
+    LoginReq {
+        Mobile   string `json:"mobile"`
+    }
+    LoginResp {
+        UserId int64 `json:"userId,string"`
+        AccessToken GenerateTokenResp `json:"accessToken"`
+    }
+)
+
+type (
+    GetUserInfoReq {
+        UserId int64 `json:"userId,string"`
+    }
+    GetUserInfoResp {
+        User User `json:"user"`
+    }
+)
+
+type (
+    GenerateTokenReq {
+        UserId int64 `json:"userId,string"`
+    }
+    GenerateTokenResp {
+        AccessToken  string `json:"accessToken"`
+        AccessExpire int64  `json:"accessExpire"`
+        RefreshAfter int64  `json:"refreshAfter"`
+    }
+)
+
+type (
+    UpdateUserNameReq {
+        UserId int64 `json:"userId,string"`
+        UserName string `json:"userName"`
+    }
+    UpdateUserNameResp {
+        Status string `json:"status"`
+    }
+)
+
+type (
+    UpdateAvatarReq {
+    }
+    UpdateAvatarResp {
+        Avatar string `json:"avatar"`
+    }
+)
+
+type (
+    UpdateFeatureReq {
+        Features []string `json:"features"`
+    }
+    UpdateFeatureResp {
+        Status string `json:"status"`
+    }
+)
+
+type (
+    UpdateWechatIdReq {
+        UserId int64`json:"userId,string"`
+        WechatId string `json:"wechatId"`
+    }
+    UpdateWechatIdResp {
+        Status string `json:"status"`
+    }
+)
+
+type (
+    UpdateUserLocationReq {
+        Location string `json:"location"`
+    }
+    UpdateUserLocationResp {
+        Status  string `json:"status"`
+    }
+)
+
+type (
+    OnlineUsersReq {
+        MerchantId int64 `json:"merchantId,string"`
+    }
+    OnlineUsersResp {
+        List []User `json:"list"`
+    }
+)
+
+type (
+    GetUserWechatIdReq {
+        UserId int64 `json:"userId,string"`
+    }
+    GetUserWechatIdResp {
+        WechatId  string `json:"wechatId"`
+    }
+)
+
+type (
+    GetUserAvatarReq {
+        File string `path:"file"`
+    }
+)
+
+type (
+    UserToStoreReq {
+        MerchantId int64 `json:"merchantId,string"`
+    }
+    UserToStoreResp {
+        Status  string `json:"status"`
+    }
+)

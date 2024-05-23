@@ -1,0 +1,16 @@
+Name: nightclub
+Host: 0.0.0.0
+Port: 8080
+CertFile: /usr/local/nginx-1.24.0/conf/proximai.cn_bundle.crt
+KeyFile: /usr/local/nginx-1.24.0/conf/proximai.cn.key
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+  AccessExpire: 31536000
+
+Redis:
+  Host: 127.0.0.1:6379
+  Type: node
+  NonBlock: false
+

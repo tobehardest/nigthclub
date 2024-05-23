@@ -1,0 +1,37 @@
+syntax = "v1"
+
+info(
+    title: "微信服务"
+    desc: "微信服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+type (
+    GetPhoneReq {
+        Code string `json:"code"`
+    }
+    WxPhoneBack {
+        ErrCode   int64       `json:"errcode"`
+        ErrMsg    string    `json:"errmsg"`
+        PhoneInfo PhoneInfo `json:"phone_info"`
+    }
+    PhoneInfo {
+        PhoneNumber     string    `json:"phoneNumber"`
+        PurePhoneNumber string    `json:"purePhoneNumber"`
+        CountryCode     string    `json:"countryCode"`
+        WaterMark       WaterMark `json:"watermark"`
+    }
+    WaterMark {
+        TimeStamp int64    `json:"timestamp"`
+        AppId     string `json:"appid"`
+    }
+    GetPhoneResp {
+        PurePhoneNumber string `json:"purePhoneNumber"`
+    }
+    WxAccessToken {
+        AccessToken string `json:"access_token"`
+        ExpiresIn   int64    `json:"expires_in"`
+    }
+)

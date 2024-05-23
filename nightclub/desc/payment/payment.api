@@ -1,0 +1,190 @@
+syntax = "v1"
+
+info(
+    title: "支付服务"
+    desc: "支付服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+type (
+    CreatePaymentReq {
+        UserId int64 `json:"userId"`
+        PayMode string `json:"payMode"`
+        PayTotal int64 `json:"payTotal"`
+        ServiceType string `json:"serviceType"`
+    }
+    CreatePaymentResp {
+        Sn string `json:"sn"`
+    }
+)
+
+type (
+    PaymentWxPayReq {
+        OrderSn     string `json:"orderSn"`
+        ServiceType string `json:"serviceType"`
+        Code string `json:"code"`
+    }
+    PaymentWxPayResp {
+        Appid     string `json:"appid"`
+        NonceStr  string `json:"nonceStr"`
+        PaySign   string `json:"paySign"`
+        Package   string `json:"package"`
+        Timestamp string `json:"timestamp"`
+        SignType  string `json:"signType"`
+    }
+)
+
+type (
+    ThirdPaymentWxPayReq {
+        Platform string `json:"platform"`
+        PayChannel string `json:"payChannel"`
+        SubClass string `json:"subClass"`
+        TenancyId string `json:"tenancyId"`
+        StoreId int64 `json:"storeId"`
+        OutTradeNo string `json:"outTradeNo"`
+        Openid string `json:"openid"`
+        Body string `json:"body"`
+        Amount float64 `json:"amount"`
+        NotifyUrl string `json:"notifyUrl"`
+        FusruleId string `json:"fusruleId,omitempty"`
+    }
+    JsApiPayConfig {
+        AppId string `json:"appId"`
+        NonceStr string `json:"nonceStr"`
+        Package string `json:"package"`
+        PaySign string `json:"paySign"`
+        SignType string `json:"signType"`
+        Timestamp string `json:"timestamp"`
+    }
+    PlatformExt {
+        SxfUuid string `json:"sxfUuid"`
+    }
+    ThirdPaymentWxPayResp {
+        ErrCode string `json:"errCode"`
+        ErrMsg string `json:"errMsg"`
+        JsApiPayConfig JsApiPayConfig `json:"jsApiPayConfig"`
+        OpenId string `json:"openId"`
+        PaymentProvider string `json:"paymentProvider"`
+        PaymentProviderName string `json:"paymentProviderName"`
+        PlatformExt PlatformExt `json:"platformExt"`
+        StoreId int64 `json:"storeId"`
+        TradeRate float64 `json:"tradeRate"`
+        TransactionId string `json:"transactionId"`
+    }
+)
+
+type (
+    PaymentWxPayQueryReq {
+        Sn string `json:"sn"` // 流水单号
+    }
+    PaymentWxPayQueryResp {
+        
+    }
+)
+
+type (
+    ThirdPaymentWxPayQueryReq {
+        Platform string `json:"platform"`
+        PayChannel string `json:"payChannel"`
+        SubClass string `json:"subClass"`
+        TenancyId string `json:"tenancyId"`
+        StoreId int64 `json:"storeId"`
+        TransactionId string `json:"transactionId"`
+        OutTradeNo string `json:"outTradeNo"`
+    }
+    ThirdPaymentWxPayQueryData {
+        ErrCode string `json:"errCode"`
+        ErrMsg string `json:"errMsg"`
+        StoreId int64 `json:"storeId"`
+        OpenId string `json:"openId"`
+        OutTradeNo string `json:"outTradeNo"`
+        TransactionId string `json:"transactionId"`
+        TradeType string `json:"tradeType"`
+        PaymentProvider string `json:"paymentProvider"`
+        PaymentProviderName string `json:"paymentProviderName"`
+        TradeRate string `json:"tradeRate"`
+        TradeState string `json:"tradeState"`
+        Amount int64 `json:"amount"`
+        BuyerPayAmount int64 `json:"buyerPayAmount"`
+        ReceipAmount string `json:"receipAmount"`
+        PlatformExt string `json:"platformExt"`
+    }
+    ThirdPaymentWxPayQueryResp {
+        Code int64 `json:"code"`
+        Msg string `json:"msg"`
+        Data string `json:"data"`
+    }
+)
+
+type (
+    PaymentWxPayCallbackReq {
+    }
+    PaymentWxPayCallbackResp {
+        ReturnCode string `json:"return_code"`
+    }
+)
+
+type (
+    ThirdPaymentWxPayCallbackReq {
+        BizCode string `json:"bizCode"`
+        BizMsg string `json:"bizMsg"`
+        TimeStamp string `json:"timeStamp"`
+        Sign string `json:"sign"`
+        Mno string `json:"mno"`
+        OrdNo string `json:"ordNo"`
+        Uuid string `json:"uuid"`
+        PayTime string `json:"payTime"`
+        Amt string `json:"amt"`
+        PayType string `json:"payType"`
+        PayWay string `json:"payWay"`
+        YlTrmNo string `json:"ylTrmNo,omitempty"`
+        OrigOrdNo string `json:"origOrdNo,omitempty"`
+        OrigUuid string `json:"origUuid,omitempty"`
+        Scene string `json:"scene,omitempty"`
+        BuyerId string `json:"buyerId,omitempty"`
+        BuyerAccount string `json:"buyerAccount,omitempty"`
+        TransactionId string `json:"transactionId,omitempty"`
+        DyType string `json:"dyType,omitempty"`
+        TotalOffstAmt string `json:"totalOffstAmt,omitempty"`
+        SettleAmt string `json:"settleAmt"`
+        PayBank string `json:"payBank,omitempty"`
+        PointAmount string `json:"pointAmount,omitempty"`
+        RecFeeRate string `json:"recFeeRate,omitempty"`
+        RecFeeAmt string `json:"recFeeAmt,omitempty"`
+        RealRefundAmount string `json:"realRefundAmount,omitempty"`
+        ChannelId string `json:"channelId,omitempty"`
+        SubMechId string `json:"subMechId,omitempty"`
+        RefBuyerAmt string `json:"refBuyerAmt,omitempty"`
+        OpenId string `json:"openId,omitempty"`
+        ActivityNo string `json:"activityNo，omitempty"`
+        SxfUuid string `json:"sxfUuid"`
+        Extend string `json:"extend,omitempty"`
+        Promotion []interface{} `json:"promotion,omitempty"`
+        Detail string `json:"detail,omitempty"`
+        RefundDetail string `json:"refundDetail,omitempty"`
+        StoreNum string `json:"storeNum,omitempty"`
+        ClearDt string `json:"clearDt,omitempty"`
+        FinishTime string `json:"finishTime,omitempty"`
+    }
+    ThirdPaymentWxPayCallbackResp {
+        Code string `json:"code"`
+        Msg string `json:"msg"`
+    }
+)
+
+type (
+    UpdateTradeStateReq {
+        Sn string `json:"sn"`
+        TradeState string `json:"tradeState"`
+        TransactionId string `json:"transactionId"`
+        TradeType string `json:"tradeType"`
+        TradeStateDesc string `json:"tradeStateDesc"`
+        PayStatus int64 `json:"payStatus"`
+        PayTime int64 `json:"payTime"`
+    }
+    UpdateTradeStateResp {
+
+    }
+)

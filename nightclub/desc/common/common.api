@@ -1,0 +1,22 @@
+info(
+    title: "通用服务"
+    desc: "通用服务"
+    author: "tobehardest"
+    email: "cvchen587@163.com"
+    version: "v1"
+)
+
+type (
+    Location {
+        AddressName string `json:"addressName"`
+        CityName  string `json:"cityName"`
+        ShopName string `json:"shopName"`
+        CustomLocation string `json:"customLocation,omitempty"`
+    }
+)
+
+type (
+    GetSpecialEffectReq {
+        SpecialEffectId string `path:"specialEffectId"`
+    }
+)
